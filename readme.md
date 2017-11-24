@@ -1,1 +1,1 @@
-# Lerning Go language.
+# Learning Go language.
