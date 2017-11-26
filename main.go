@@ -1,5 +1,10 @@
 package main
 
+// 実行
+// $ go run main.go
+// ビルド
+// $ go build main.go & main.exe
+
 import (
 	"fmt"
 	"math/rand"
@@ -78,10 +83,24 @@ func main() {
 	slice1 = slice1[0:5] // 縮めたやつを戻すと復活するが、省略記法を使うと縮めたあとの長さのままになる
 	printSliceInfo(slice1)
 
+	// makeって言う関数で作ると動的サイズの配列っぽくなる
+	var makedSlice = make([]bool, 5, 5)
+
+	printSliceInfo(makedSlice)
+
+	makedSlice = append(makedSlice, true, true, true)
+
+	printSliceInfo(makedSlice)
+
+	var t = []int{1, 2, 3, 4, 5}
+	for i, v := range t { // rangeキーワードを使うと、右辺の配列を一つずつ左辺へ代入出来る
+		fmt.Printf("i:%d v:%d\n", i, v)
+	}
+
 	// 遅延実行。関数を抜ける前に実行される
-	defer (func() {
+	defer func() {
 		fmt.Println("\n---------------------------\nend of process.")
-	})()
+	}()
 }
 
 // 関数
@@ -119,5 +138,26 @@ type Rect struct {
 	bottom int
 }
 
-// $ go run main.go
-// $ go build main.go & main.exe
+// https://go-tour-jp.appspot.com/moretypes/18 で書いたやつ↓
+
+/*
+package main
+
+import "golang.org/x/tour/pic"
+
+func Pic(dx, dy int) (result [][]uint8) {
+	result = make([][]uint8, dy, dy)
+	for y := range result {
+		result[y] = make([]uint8, dx, dx)
+		for x := range result[y] {
+			result[y][x] = uint8(x * x + y * y)
+		}
+	}
+	return
+}
+
+func main() {
+	pic.Show(Pic)
+}
+
+*/
