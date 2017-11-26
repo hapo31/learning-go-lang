@@ -72,6 +72,11 @@ func main() {
 	var slice1 = []bool{true, true, false, false, false}
 
 	fmt.Println(arr1, slice1)
+	fmt.Println(slice1[0:2]) // スライスの作成 [begin, end)
+	slice1 = slice1[:2]
+	printSliceInfo(slice1)
+	slice1 = slice1[0:5] // 縮めたやつを戻すと復活するが、省略記法を使うと縮めたあとの長さのままになる
+	printSliceInfo(slice1)
 
 	// 遅延実行。関数を抜ける前に実行される
 	defer (func() {
@@ -99,6 +104,11 @@ func Fibo(max int) {
 		prev = now
 		now = result
 	}
+}
+
+func printSliceInfo(s []bool) {
+	// sliceの情報はlenとcapでそれぞれ取れる
+	fmt.Printf("%v size:%d cap:%d\n", s, len(s), cap(s))
 }
 
 // 構造体
