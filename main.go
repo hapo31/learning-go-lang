@@ -97,6 +97,29 @@ func main() {
 		fmt.Printf("i:%d v:%d\n", i, v)
 	}
 
+	// Map
+	var m map[string]int // map[key-type]value-type
+	m = make(map[string]int)
+	m["hogehoge"] = 10
+	m["fugafuga"] = 20
+
+	mm := map[string]int{
+		"test":  10,
+		"test2": 11,
+		"test3": 12,
+	}
+
+	fmt.Println(m)
+	fmt.Println(mm)
+	// キーの削除
+	delete(mm, "test")
+	fmt.Println(mm)
+
+	// 存在チェック
+	elem, exists := m["test"]
+
+	fmt.Printf("%v %v", elem, exists)
+
 	// 遅延実行。関数を抜ける前に実行される
 	defer func() {
 		fmt.Println("\n---------------------------\nend of process.")
@@ -137,27 +160,3 @@ type Rect struct {
 	top    int
 	bottom int
 }
-
-// https://go-tour-jp.appspot.com/moretypes/18 で書いたやつ↓
-
-/*
-package main
-
-import "golang.org/x/tour/pic"
-
-func Pic(dx, dy int) (result [][]uint8) {
-	result = make([][]uint8, dy, dy)
-	for y := range result {
-		result[y] = make([]uint8, dx, dx)
-		for x := range result[y] {
-			result[y][x] = uint8(x * x + y * y)
-		}
-	}
-	return
-}
-
-func main() {
-	pic.Show(Pic)
-}
-
-*/
