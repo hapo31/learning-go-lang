@@ -21,6 +21,14 @@ func main() {
 		return a + b
 	}
 
+	f = func(c int) { return c }
+
+	ff = func(fn func(int) int) {
+		return fn(10)
+	}
+
+	fmt.Println("ff(f) = ", ff(f))
+
 	fmt.Printf("%.2f\n", compute(add))
 
 	counter := getCounter()
