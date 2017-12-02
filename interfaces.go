@@ -59,12 +59,44 @@ func main() {
 	PrintTypeInfo(x)
 	Add(x, 10, 10)
 	PrintTypeInfo(x)
+
+	var interfaceVal interface{} = 10
+	// interfaceの型アサーション
+	var c1, ok1 = interfaceVal.(string)
+	fmt.Println(c1, ok1)
+
+	var c2, ok2 = interfaceVal.(float64)
+	fmt.Println(c2, ok2)
+
+	// switch文で一気にアサーションと分岐
+	switch v := interfaceVal.(type) {
+	case int:
+		fmt.Printf("int: v * 2 = %d\n", v*2)
+	case string:
+		fmt.Println("string:", v)
+	case float64:
+		fmt.Printf("float: %.2f", v)
+	}
+
+	var person = Person{"マイケル☆", 114514}
+	fmt.Println(person)
 }
 
+type Person struct {
+	Name string
+	Age  int
+}
+
+// 独自型の文字列化はString()というレシーバーを定義して行う
+func (p Person) String() string {
+	return fmt.Sprintf("Name:%v  Age:%v", p.Name, p.Age)
+}
+
+// 空のインターフェースは任意の値を渡せる
 type T interface {
 }
 
-func PrintTypeInfo(t T) {
+func PrintTypeInfo(t T) { // ここはTの代わりにinterface{}でもいいらしい
 	fmt.Printf("%T [%v]\n", t, t)
 }
 
